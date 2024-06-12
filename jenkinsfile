@@ -1,11 +1,10 @@
 pipeline {
     agent any
     stages{
-        stage('build project'){
+        stage('git cloned'){
             steps{
                 git url:'https://github.com/Ashu7072/Project-1', branch: "main"
-                sh 'mvn clean package'
-              
+                          
             }
         }
         stage('Build docker image'){
@@ -16,8 +15,14 @@ pipeline {
                 }
             }
         }
-         
-        
+         stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: DOCKER_HUB_CREDENTIALS, passwordVariable: 'ashu@7072', usernameVariable: 'ashu7072')]) {
+                    sh "echo ashu@7072 | docker login -u ashu7072 --password-stdin"
+                    sh "docker push ashu7072/staragileprojectfinance:v1"
+                }
+            }
+        }
      stage('Deploy') {
             steps {
                 sh 'sudo docker run -itd --name My-first-container1 -p 8083:8081 ashu7072/staragileprojectfinance:v1'
