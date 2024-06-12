@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages{
-        stage('git cloned'){
+        stage('build project'){
             steps{
                 git url:'https://github.com/Ashu7072/Project-1', branch: "main"
-                          
+                sh 'mvn clean package'        
             }
         }
         stage('Build docker image'){
