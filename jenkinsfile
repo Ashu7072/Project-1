@@ -10,7 +10,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t ashu7072/staragileprojectfinance:v1 .'
+                    sh 'docker build -t ashu7072/staragileprojectfinance1:v1 .'
                     sh 'docker images'
                 }
             }
