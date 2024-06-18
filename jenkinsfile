@@ -19,13 +19,13 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh "docker push ashu7072/staragileprojectfinance:v1"
+                    sh "docker push ashu7072/staragileprojectfinance1:v1"
                 }
             }
         }
      stage('Deploy') {
             steps {
-                sh 'sudo docker run -itd --name My-first-container1111 -p 8082:8081 ashu7072/staragileprojectfinance:v1'
+                sh 'sudo docker run -itd --name My-first-container001 -p 8084:8081 ashu7072/staragileprojectfinance1:v1'
                   
                 }
             }
